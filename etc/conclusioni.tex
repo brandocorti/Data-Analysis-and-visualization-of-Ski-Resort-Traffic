@@ -1,0 +1,85 @@
+
+\chapter{Risultati e Conclusioni}
+\label{cha:Conclusioni}
+
+Il presente capitolo riassume i principali risultati emersi dall’analisi multidimensionale condotta sui dati di affluenza agli impianti sciistici gestiti da \textbf{Freccia nel Cielo}, integrati con i dati meteorologici forniti da \textbf{ARPA Veneto}.  
+Le analisi, realizzate mediante lo strumento di data visualization \textit{Tableau}, hanno permesso di indagare le dinamiche stagionali, settimanali e meteorologiche che influenzano la presenza degli utenti sulle piste, evidenziando pattern ricorrenti e tendenze specifiche del contesto di Cortina d’Ampezzo.
+
+\section{Sintesi dei risultati delle analisi}
+
+
+\subsection*{Picchi stagionali di affluenza}
+Dall’analisi~\ref{sec:analisi1} emerge che il periodo natalizio rappresenta il picco massimo di affluenza agli impianti, come prevedibile in relazione ai flussi turistici stagionali.  
+Tuttavia, lo stesso periodo si caratterizza anche per una forte variabilità giornaliera: pur registrando i valori più elevati della stagione, mostra un andamento irregolare, con oscillazioni marcate tra giornate di alta e bassa affluenza, come evidenziato nel grafico dei passaggi totali nella figura~\ref{fig:passaggi_tot_stagione}.\\
+
+Lo studio ha inoltre evidenziato come il periodo di \textbf{Carnevale} presenti un comportamento opposto: non raggiunge i picchi assoluti del Natale, ma mostra una notevole \textbf{stabilità} dei flussi, con una media di passaggi giornalieri elevata e costante sia durante le festività sia nei giorni immediatamente successivi.  
+In sostanza, il periodo più equilibrato e regolare, con affluenze elevate ma meno soggette a variazioni improvvise, risulta essere proprio quello carnevalesco, come confermato anche dal grafico dei passaggi totali con esclusione del periodo natalizio (figura~\ref{fig:passaggi_tot_noNatale}). \\
+
+Si può quindi concludere che, sebbene il turismo invernale sia fortemente trainato dal periodo natalizio, anche il Carnevale riveste un ruolo significativo nel sostenere i livelli di affluenza complessiva.
+
+\subsection*{Variazioni settimanali e pattern giornalieri}
+L’analisi~\ref{sec:analisi2}, articolata nelle sue due viste principali, ha evidenziato due tendenze particolarmente interessanti e, in parte, inattese.  
+In primo luogo, il \textbf{sabato} risulta essere la giornata settimanale con la maggiore affluenza complessiva, superando la \textbf{domenica}, che comunemente è considerata la giornata più frequentata sulle piste.  
+Questo andamento si conferma in modo costante per l’intera stagione, come mostrato nella vista superiore della figura~\ref{fig:Weekend_cumulativo}, dove la linea viola, corrispondente al sabato, risulta quasi sempre la più alta rispetto a quella rossa della domenica.\\
+
+Un secondo risultato significativo emerge considerando l’intera settimana: analizzando il grafico inferiore, che rappresenta la \textbf{somma cumulativa dei passaggi} per giorno, si osserva che il secondo giorno per volume complessivo non appartiene al weekend, bensì è il \textbf{martedì}.  
+Questo comportamento, visualizzabile nella dashboard con l’inclusione del martedì (figura~\ref{fig:dash_tuesday} in appendice), risulta inaspettato ma coerente con la presenza di flussi turistici prolungati o nuovi arrivi settimanali.\\
+
+Queste evidenze offrono indicazioni pratiche di rilievo per la \textbf{gestione operativa} e la pianificazione delle risorse negli impianti della valle, suggerendo la necessità di un’attenzione particolare non solo ai weekend, ma anche ai giorni centrali della settimana, potenzialmente interessanti per attività promozionali o iniziative di fidelizzazione.
+
+
+\subsection*{Classificazione e influenza delle condizioni meteorologiche}
+L’analisi~\ref{sec:analisi3} ha permesso di classificare tutte le giornate della stagione in tre categorie termiche — \textbf{freddo}, \textbf{mite} e \textbf{caldo} — grazie all’utilizzo di campi calcolati che considerano non solo la temperatura rilevata, ma anche l’effetto del vento sulla temperatura percepita sulle piste.  
+Questa classificazione consente di ottenere una rappresentazione più realistica delle condizioni ambientali vissute dagli sciatori, fornendo una base solida per correlare le variabili meteorologiche con i livelli di affluenza.\\
+
+Combinata con le altre analisi del capitolo, questa dashboard rappresenta uno strumento utile per interpretare l’impatto meteorologico delle singole giornate, permettendo di individuare rapidamente le situazioni potenzialmente più favorevoli o critiche in termini di presenze.  
+Nella vista principale, illustrata in figura~\ref{fig:Classificazione termica}, ogni giorno è rappresentato da una barra colorata in funzione della categoria termica, mentre la linea sovrapposta mostra l’andamento della temperatura percepita nel corso della stagione.  
+Si osserva come, nella seconda metà dell’inverno, la tendenza generale sia verso un progressivo aumento dell’escursione termica giornaliera, visibile dall’ampliarsi delle barre verticali: questo fenomeno suggerisce un maggiore sbalzo tra le ore mattutine e quelle pomeridiane, con possibili implicazioni sulla qualità della neve e sulle abitudini di presenza sulle piste.  
+È infatti plausibile che tali condizioni inducano gli sciatori a preferire le prime ore del giorno, quando la neve mantiene caratteristiche migliori.\\
+
+La vista secondaria della dashboard evidenzia invece la \textbf{distribuzione dei passaggi totali} per categoria termica.  
+Da questa si nota come le giornate fredde non rappresentino un deterrente per la pratica sciistica: al contrario, registrano il \textbf{maggior volume di passaggi}, quasi più del doppio rispetto alle giornate miti.  
+Le giornate calde, al contrario, risultano estremamente limitate, solo sette in tutta la stagione, e il numero di passaggi in tali condizioni risulta trascurabile rispetto alle altre due categorie. \\ 
+
+Nel complesso, l’analisi conferma che gli sciatori tendono ad adattarsi bene alle basse temperature, mentre i fattori che richiederebbero un ulteriore analisi con l'aiuto di parametri orari sono quelli dell'escursione termica.
+Queste informazioni offrono un importante contributo per la comprensione del comportamento degli utenti e per la pianificazione di attività o servizi in base alle condizioni meteorologiche prevalenti.
+
+
+\subsection*{Impatto delle giornate nevose e differenze tra tipologie di Skipass}
+L’analisi~\ref{sec:analisi4} ha approfondito l’effetto delle giornate caratterizzate da precipitazioni nevose sull’affluenza complessiva e, in particolare, sulle due principali tipologie di skipass in uso: \textbf{Valle} (per cui si veda la vista in appendice \ref{fig:Impatto_neve_Valle}) e \textbf{Dolomiti Superski (DS)}.  
+L’obiettivo era valutare se e in che misura la presenza di neve, generalmente considerata un elemento favorevole all’attività sciistica, potesse invece incidere negativamente sulla partecipazione quotidiana, influenzando in modo differenziato i diversi segmenti di utenza.\\
+
+L’impatto sulle presenze totali è evidente: come mostrato nella figura~\ref{fig:Impatto_neve}, le colonne rosa, corrispondenti alle giornate con precipitazioni nevose, si associano quasi sempre a livelli di affluenza inferiori rispetto alle giornate senza neve.  
+Solo in rari casi, in coincidenza con periodi di particolare richiamo turistico, si osservano valori comparabili.  
+Questo comportamento suggerisce che, sebbene la neve costituisca un fattore essenziale per l’attività sciistica nel lungo periodo, le giornate in cui essa cade effettivamente rappresentano un ostacolo momentaneo per l’affluenza, probabilmente anche a causa della scarsa visibilità o delle condizioni di trasporto e spostamento.\\
+
+L’effetto sui diversi tipi di skipass emerge con chiarezza dalle viste secondarie della dashboard, che riportano i valori di \textbf{passaggi medi} e \textbf{passaggi totali} nelle giornate con e senza precipitazioni.  
+Dalle tabelle~\ref{tab:Neve_medie} e~\ref{tab:Neve_totali} risulta che la riduzione più marcata si registra per lo skipass \textbf{Dolomiti Superski}, la cui media giornaliera di passaggi nelle giornate nevose è pari al \textbf{44,3\%} di quella osservata in assenza di neve, contro il \textbf{51,6\%} rilevato per lo skipass \textbf{Valle}.  
+La stessa tendenza, seppur in misura più contenuta, si conferma anche nei passaggi totali: rispettivamente \textbf{7,1\%} per lo skipass DS e \textbf{8,2\%} per quello Valle.  
+Questi dati, pur evidenziando differenze numericamente ridotte, sono statisticamente significativi per comprendere il diverso comportamento dei due segmenti di utenza e, di fatto, dei due titoli.\\
+
+Il comportamento differenziale osservato può essere attribuito alla diversa composizione e abitudine d’uso dei due gruppi di sciatori.  
+Gli utenti dotati di skipass \textbf{Dolomiti Superski}, spesso non locali o provenienti da altri comprensori, risultano più sensibili alle condizioni meteorologiche e logistiche, rinunciando più facilmente alla giornata di sci in presenza di neve o maltempo.  
+Al contrario, gli sciatori titolari di skipass \textbf{Valle}, in gran parte utenti locali o abituali, mostrano una maggiore costanza di partecipazione anche in condizioni meteo avverse.  
+Questo risultato può essere spiegato anche dalla diversa tipologia di abbonamento: gli skipass stagionali, più diffusi tra gli utenti DS, offrono una maggiore flessibilità nella scelta dei giorni di utilizzo e non impongono la necessità di “sfruttare” ogni giornata disponibile.  
+Gli skipass di breve durata, tipici invece della categoria Valle, incentivano un utilizzo più continuo, anche in presenza di precipitazioni, poiché l’utente tende a voler valorizzare al massimo il proprio acquisto.\\
+Nel complesso, l’analisi dimostra come la neve, pur essendo elemento simbolicamente positivo per il contesto sciistico, rappresenti un fattore \textbf{limitante nel breve periodo}, che riduce la frequenza delle visite giornaliere.  
+Tuttavia, l’impatto non è uniforme e risulta modulato dalla tipologia di skipass, dal profilo dell’utenza e dalle motivazioni di accesso.  
+Queste evidenze possono supportare strategie di comunicazione e pricing mirate, ad esempio promozioni nei giorni nevosi o incentivi per l’utenza turistica, con l’obiettivo di attenuare le flessioni di affluenza legate alle condizioni atmosferiche.
+
+
+\section{Riflessioni finali e sviluppi futuri}
+
+I risultati ottenuti mostrano come l’integrazione tra dati operativi e meteorologici consenta di costruire strumenti analitici efficaci per il \textbf{supporto decisionale} nella gestione degli impianti sciistici.  
+La possibilità di visualizzare in modo interattivo i diversi scenari stagionali e meteorologici permette di anticipare i picchi di domanda, ottimizzare la distribuzione delle risorse e migliorare la pianificazione del personale.  
+L’uso combinato di tecniche di \textit{data visualization} e di un modello a costellazione dei dati ha inoltre dimostrato la capacità di rappresentare in maniera chiara e sintetica fenomeni complessi, rendendo accessibili anche a figure non tecniche informazioni strategiche per la gestione quotidiana e per la programmazione stagionale.
+
+In prospettiva, l’ampliamento del dataset a più aree scisitche  e l’inclusione di nuove variabili, come l’origine geografica dei visitatori, la tipologia di impianto o i dati orari di accesso,  potrebbero arricchire ulteriormente l’analisi, consentendo di modellare con maggiore precisione la relazione tra condizioni ambientali, caratteristiche del pubblico e comportamento dell’utenza.  
+
+In sintesi, il lavoro svolto dimostra come un approccio basato sulla \textbf{Business Intelligence territoriale} e sulla \textbf{data visualization} possa fornire un contributo concreto alla gestione operativa utile e consapevole delle destinazioni turistiche alpine, promuovendo un utilizzo più efficiente delle risorse, una migliore esperienza per i visitatori e un'organizzazioe più strutturata favorevole ai lavoratori. \\ 
+
+Infine, si sottolinea che la metodologia e l’impostazione analitica sviluppate in questo elaborato sono pienamente \textbf{replicabili e adattabili} ad altri comprensori sciistici o località turistiche montane.  
+Applicando lo stesso modello di integrazione tra dati operativi e informazioni meteorologiche — opportunamente personalizzato con i dati locali di ciascuna realtà — è possibile ottenere risultati analoghi, capaci di generare \textbf{indicatori specifici e comparabili} tra diverse aree.  
+Questo rende il modello proposto uno strumento flessibile e scalabile, utile non solo per singole aziende impiantistiche, ma anche per enti di promozione turistica o amministrazioni locali che desiderino comprendere e ottimizzare le dinamiche di affluenza legate alle condizioni ambientali e stagionali.
+
+

@@ -1,0 +1,174 @@
+\documentclass[a4paper, 11pt, titlepage, twoside, openany]{book}
+\usepackage{setspace}
+% Layout
+\usepackage[
+  paperheight=29.7cm,
+  paperwidth=21cm,
+  outer=1.5cm,
+  inner=2.5cm,
+  top=2cm,
+  bottom=2cm
+]{geometry}
+
+% AGGIUNTE PER RISOLVERE I PROBLEMI DI ALLINEAMENTO
+\usepackage{microtype}  % Essenziale per migliorare la giustificazione
+\usepackage{ragged2e}   % Per controllo avanzato dell'allineamento
+
+% Impostazioni per migliorare la giustificazione
+\tolerance=1000         % Aumenta la tolleranza per la giustificazione
+\emergencystretch=3pt   % Permette stretching in caso di emergenza
+\hyphenpenalty=1000     % Riduce la penalità per la sillabazione
+\exhyphenpenalty=1000   % Penalità per sillabazione dopo caratteri espliciti
+
+% Chapter
+\usepackage{titlesec}
+\singlespacing
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}
+
+% Letter
+\usepackage[utf8]{inputenc}
+
+% Language
+\usepackage[italian]{babel}
+
+% PDF/A
+\usepackage[a-1b]{pdfx}
+
+% Image
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{wrapfig}
+\usepackage{stackengine}
+\usepackage{etoolbox}
+\BeforeBeginEnvironment{wrapfigure}{\setlength{\intextsep}{0pt}}
+
+% Hyperlink
+\usepackage{xurl}
+\usepackage[pdfa]{hyperref}
+\hypersetup{breaklinks=true}
+
+%SQL 
+% Listings per codice SQL
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinelanguage{SQL}{
+  morekeywords={CREATE, DATABASE, USE, TABLE, PRIMARY, KEY, FOREIGN, REFERENCES, INT, AUTO_INCREMENT, NOT, NULL, VARCHAR, DATE, BOOLEAN, DECIMAL, INSERT, INTO, VALUES},
+  sensitive=false,
+  morecomment=[l]{--},
+  morestring=[b]',
+}
+
+\lstset{
+  language=SQL,
+  basicstyle=\footnotesize\ttfamily,
+  breaklines=true,
+  captionpos=b,
+  frame=single,
+  rulecolor=\color{gray!70},
+  keywordstyle=\color{blue!80!black}\bfseries,
+  commentstyle=\color{gray!70}\itshape,
+  stringstyle=\color{green!40!black},
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=6pt,
+  tabsize=2,
+  keepspaces=true
+}
+
+
+% List
+\usepackage{enumitem}
+\usepackage{csquotes}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+
+% Document
+\begin{document}
+
+  % Cover
+  \pagenumbering{gobble}
+  \input{etc/cover}
+  \clearpage
+
+  %dedica
+  \input{etc/dedica.tex}
+  \clearpage
+
+
+  
+
+  % Table of Contents
+  \frontmatter
+  \pagenumbering{Roman}
+  \tableofcontents
+  \clearpage
+  \begingroup
+  \pagestyle{empty}
+  \cleardoublepage
+  \endgroup
+
+  % Start page numbering
+  \mainmatter
+
+  \justifying
+
+  % Group to define space between chapters
+  \begingroup
+  % Override format of title chapter
+  \titleformat{\chapter} {\normalfont\Huge\bfseries}{\thechapter}{1em}{} \titlespacing*{\chapter}{0pt}{0.59in}{0.02in}
+  \titlespacing*{\section}{0pt}{0.20in}{0.02in} \titlespacing*{\subsection}{0pt}{0.10in}{0.02in}
+  \titlespacing*{\subsubsection}{0pt}{0.05in}{0.02in}
+
+  % Abstract
+ % \input{etc/Sommario.tex}
+
+  % Chapters
+    %\input{chapters/examples.tex}
+    \input{chapters/1_Introduzione.tex}
+
+    %capitolo Fonti e caratteristiche sui dati
+    \input{chapters/2_data_property.tex}
+
+    %Operazioni sui dati
+    \input{chapters/3_data_op.tex}
+
+    %Data analisi e Visualizzazione
+
+    %capitolo prova 
+    \input{chapters/4_Analisi.tex}
+    
+    % Conclusions
+    \input{etc/conclusioni.tex}
+
+    % Ringraziamenti
+    \input{etc/acknowledgements}
+
+  \endgroup
+
+  % Bibliography
+  \addcontentsline{toc}{chapter}{Bibliografia}
+  % Alphabetical order of authors
+  \bibliographystyle{unsrt}
+  \bibliography{bibliography.bib}
+
+  % Attachments
+  \titleformat{\chapter} {\normalfont\Huge\bfseries}{\thechapter}{1em}{}
+  \appendix
+  \input{attachments/Appendix.tex}
+
+% --- Pagine bianche finali (per note scritte a mano) ---
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+% --------------------------
+\end{document}

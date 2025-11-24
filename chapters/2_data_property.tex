@@ -1,0 +1,148 @@
+\chapter{Fonti e caratteristiche dei Dati}
+\label{cha:data_prop}
+
+In questo capitolo vengono presentati in modo approfondito i dati utilizzati nello studio, con particolare attenzione alla loro provenienza e ai meccanismi di raccolta. 
+Si fornirà innanzitutto una panoramica sugli enti che hanno reso disponibili le informazioni, individuabili principalmente in due soggetti:
+\begin{itemize}
+    \item \textbf{ARPAV} – Agenzia Regionale per la Protezione Ambientale del Veneto, responsabile delle previsioni meteorologiche e della raccolta dei dati ambientali;
+    \item \textbf{Tofana srl - Freccia nel cielo} – azienda operante nel settore turistico-sciistico, che gestisce un complesso di impianti di risalita, parcheggi e funivie nell’area delle piste da sci di Cortina d’Ampezzo\footnote{Nel seguito dell'elaborato verrà  nominata principalmente come Freccia nel Cielo}.
+\end{itemize}
+
+A seguire, verrà proposta un’analisi introduttiva di entrambe le realtà, utile a contestualizzare la discussione, per poi entrare nel dettaglio della natura, della configurazione e delle caratteristiche specifiche dei dati impiegati nell’elaborato.
+
+\section{Dati meteorologici ARPAV}
+I dati meteorologici utilizzati nello studio sono stati forniti dall’Agenzia Regionale per la Prevenzione e Protezione Ambientale del Veneto (ARPAV) e fanno riferimento alla stazione meteorologica di Gilardon. 
+Le informazioni raccolte includono le misurazioni effettuate presso tale stazione, la cui localizzazione geografica e le caratteristiche principali sono riportate nella tabella seguente.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline
+      Stazione   &  \textbf{Cortina d'Ampezzo - Gilardon} \\ \hline
+        Quota & \textbf{1271 m s.l.m.} \\ \hline
+        Coordinate (EPSG 4258) & \textbf{12.1273966; 46.53668964} (Lon, Lat) \\ \hline
+        Comune & \textbf{Cortina d'Ampezzo (Belluno)} \\ \hline
+    \end{tabular}
+    \caption{Dati di rilevamento della stazione meteorologica ARPAV di Gilardon}
+    \label{tab:rilevamento_dati}
+\end{table}
+
+\subsection{Storia e ruolo dell’ente}
+ARPAV è stata istituita con la legge regionale n. 32 del 18 ottobre 1996, divenendo operativa nel 1997 \cite{LeggeRegionale32_1996}. 
+L'agenzia persegue due obiettivi fondamentali:
+\begin{itemize}
+    \item \textbf{Protezione}, attraverso i controlli ambientali volti a tutelare la salute della popolazione della regione;
+    \item \textbf{Prevenzione}, attraverso attività di ricerca, informazione e educazione ambientale.
+\end{itemize}
+ARPAV opera come agenzia regionale con autonomia amministrativa e organizzativa \cite{ARPAV_Storia}. 
+
+\subsection{Caratteristiche e specifica dei dati}
+Buona parte del dataset originario è accessibile pubblicamente su richiesta, tramite gli archivi storici di ARPAV \cite{ARPAV_public}. 
+Tuttavia, per integrare le informazioni necessarie allo studio, sono stati messi a disposizione anche dati personalizzati; in particolare, un campo che distingue la quantità di neve caduta (in millimetri)\cite{ARPAV_private} nei singoli giorni, informazione non presente nei dataset pubblici, nei quali le precipitazioni sono riportate come quantità complessiva in millimetri, che sia neve oppure pioggia. 
+Questo calcolo è stato reso possibile grazie a rilevazioni ausiliarie e a modelli di conversione specifici.\\
+
+Al fine di fornire una rappresentazione chiara e strutturata dei dataset utilizzati, nella Tabella~\ref{tab:SpecificaMeteo} vengono riportati i campi  relativi ai dati meteorologici raccolti \footnote{\textit{Nota.}
+Le rilevazioni della temperatura nella tabella si distinguono in minima, media e massima giornaliera, ma per questioni di impaginazione nell'esempio sopra  ne viene riportata un unica dicitura.}.\\
+
+La prima riga riporta i nomi delle colonne, corrispondenti alle variabili osservate, mentre la seconda riga mostra un esempio reale estratto dal dataset, utile a illustrare il formato e la natura dei valori memorizzati. I dati prima di essere stati considerati nello studio hanno subito un processo di pre elaborazione e rimozione dei valori nulli che verrà spiegato con ulteriore dettaglio nel capitolo successivo \ref{cha:Data_op}.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cccccc}
+        \toprule
+        \textbf{Data} & \textbf{Giorno} & \textbf{Temperatura}  & \textbf{Precipitazione} & \textbf{Velocità Vento} & \textbf{Direzione Vento} \\
+        \midrule
+        12/01/2023 & Giovedì &  $0.5$ & $0.2$ & $12.3$ & NO \\
+        \bottomrule
+    \end{tabular}
+    \caption{Struttura ed esempio di riga del dataset meteorologico.}
+    \label{tab:SpecificaMeteo}
+\end{table}
+
+Ad esclusione dei campi relativi alla datazione, la rilevazione delle informazioni, che avviene molto vicino agli impianti nell'area di Gilardon, ha le seguenti unità di misura:
+
+\begin{itemize}
+    \item \textbf{Temperatura:} rileva la temperatura dell'aria a 2 metri in gradi (C°).
+    \item \textbf{Precipitazione:} considera eventuali precipitazioni arrivate al suolo in millimetri, si considera una giornata piovosa se la precipitazione giornaliera è maggiore o uguale a 1. \footnote{A questo campo va aggiunta la tabella personalizzata fornita da ARPAV che descrive i millimetri di neve al suolo, senza di essa non sarebbe possibile differenziare la precipitazione piovosa da quella nevosa.}
+    \item \textbf{Velocità vento:} rilevazione dell'intensità del vento a 5 metri in metri al secondo.
+    \item \textbf{Direzione Vento:} dato relativo al settore prevalente di direzione del vento a 5 metri.
+\end{itemize}
+
+
+Il campo calcolato personalizzato utilizzato per analizzare la componente nivometrica del dataset citato nei pragrafi precedenti,  è riportato nella tabella seguente. 
+In particolare, \textbf{Hn} rappresenta l'altezza della neve fresca caduta nelle 24 ore precedenti la misurazione, calcolata dalle ore 8:00 del giorno corrente alle ore 8:00 del giorno successivo, espressa in centimetri. 
+La variabile \textbf{Hs}, invece, indica l'altezza complessiva della neve al suolo rilevata alle ore 8:00 di ogni mattina, anch'essa espressa in centimetri. 
+
+Queste due misure permettono di quantificare in modo preciso sia l'apporto giornaliero di neve fresca sia l’accumulo totale al suolo. 
+Tali informazioni, combinate con i dati meteorologici riportati nella tabella precedente, consentono di distinguere in modo più accurato l’impatto di diverse condizioni atmosferiche, come nevicate o giornate di pioggia, sull'affluenza turistica e sull’operatività degli impianti sciistici.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccc}
+        \toprule
+        \textbf{Data} & \textbf{Hn (cm)} & \textbf{Hs (cm)} \\
+        \midrule
+        18/01/2024 & 10 & 35 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Esempio di misurazione dell'altezza della neve fresca (Hn) e dell'altezza della neve al suolo (Hs) rilevate alle ore 8:00.}
+    \label{tab:dati_neve}
+\end{table}
+
+
+
+\section{Dati  Tofana srl - Freccia nel cielo}
+
+I dati relativi ai passaggi ai tornelli sono stati forniti esclusivamente dalla società Tofana srl - Freccia nel Cielo. Come già evidenziato nell’introduzione, l’azienda non gestisce la totalità degli impianti di risalita presenti nell’area della Tofana, ma una parte significativa di essi.
+Nonostante ciò, l’ampiezza e la qualità del campione di dati disponibili risultano pienamente adeguate per le finalità analitiche del presente studio, consentendo di ottenere una rappresentazione statisticamente affidabile e significativa delle dinamiche di affluenza all’interno del comprensorio.
+
+\subsection{Storia e ruolo dell'ente}\label{cap:Storia_FNC}
+
+L’impianto principale gestito dalla società \textbf{Freccia nel Cielo}  è costituito dalla cabinovia che collega il centro di Cortina d'Ampezzo con l'area di \textbf{Col Druscié} e dalla funivia che collega quest'ultima con l'area sciistica di \textbf{Ra Valles}, la più elevata in quota dell’intero comprensorio. Nella sua configurazione attuale, l’impianto è tecnologicamente avanzato: l’aggiornamento dalla precedente funivia a cabinovia è stato completato nel 2020, migliorando sensibilmente la capacità di trasporto e il comfort per gli utenti. Tuttavia, la sua storia risale a diversi decenni fa e rappresenta una parte significativa dello sviluppo turistico e infrastrutturale di Cortina.\\
+
+La proposta originaria prevedeva la realizzazione di una funivia che partisse dal centro cittadino, in un’area adiacente allo Stadio Olimpico del Ghiaccio (quota 1.217 m), e raggiungesse la vetta della Tofana di Mezzo (quota 3.244 m), con due stazioni intermedie situate a Col Druscié e Ra Valles. Il progetto, ambizioso per l’epoca e con grandi potenzialità per lo sviluppo turistico locale, presentava costi particolarmente elevati per il comune. Per questa ragione fu coinvolto Emilio Valentino Vascellari, imprenditore già attivo nel settore impiantistico e proprietario della funivia della Marmolada.\\
+
+I lavori di costruzione iniziarono nel 1967 e si conclusero nel 1971, anno in cui vennero inaugurate le prime tre tratte della funivia. Successivamente, nel 1975 fu completata anche la tratta finale fino alla vetta della Tofana di Mezzo, realizzata con una seggiovia. Nel corso dei decenni successivi, l’impianto ha subito importanti interventi di ammodernamento e ampliamento, con la sostituzione di parte delle strutture originarie e l’aggiunta di nuove linee nel comprensorio di Ra Valles. Nonostante tali trasformazioni, la gestione dell’infrastruttura è rimasta nelle mani della stessa famiglia Vascellari, che ne aveva sostenuto la realizzazione iniziale, mantenendo così un forte legame tra storia imprenditoriale e sviluppo turistico locale\footnote{Le informazioni relative alla storia e alle specifiche tecniche dell’impianto provengono da colloqui con il personale operativo e dal volume \cite{Freccia_nel_cielo_book}, che documenta la storia e i progetti della famiglia Vascellari.}
+
+
+
+
+\subsection{Caratteristiche e specifica dei dati}
+L'intero database di informazioni fornito dall'ente è costituito da  dati aziendali interni, non disponibili pubblicamente, messi a disposizione su richiesta per lo sviluppo del presente elaborato.
+Le informazioni, contenute in file Excel, documentano i passaggi giornalieri registrati ai  tornelli dei diversi impianti di risalita gestiti dalla società, includendo dettagli relativi alla tipologia di skipass utilizzato. Nella Tabella~\ref{tab:SpecificaImpianto} è riportato un esempio della struttura dei dati.\\
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cccccc}
+        \toprule
+        \textbf{Data} & \textbf{Impianto} & \textbf{Pass. DS}  & \textbf{Pass. SP} & \textbf{Pass. Valle} & \textbf{Passaggi Tot.} \\
+        \midrule
+        24/12/2023 & Colfiere-Col Drusciè &  $1217$ & $278$ & $2395$ & $3928$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Struttura ed esempio di riga del dataset degli Impianti Freccia nel Cielo.}
+    \label{tab:SpecificaImpianto}
+\end{table}
+
+La Tabella~\ref{tab:SpecificaImpianto} mostra quindi la configurazione di riferimento del dataset relativo ai flussi di accesso agli impianti di risalita gestiti da Tofana srl, accompagnata da un esempio di record estratto dal database originario.
+Ogni riga del dataset rappresenta un record aggregato giornaliero, che descrive il numero complessivo di passaggi su un determinato impianto per ciascuna tipologia di skipass attiva in quella giornata.
+Tali informazioni costituiscono la base dell’analisi successiva, poiché permettono di distinguere le differenti categorie di utenti e di valutare in modo comparativo le dinamiche di utilizzo delle infrastrutture nel tempo e tra i vari impianti.
+
+Di seguito viene fornita una descrizione dettagliata dei campi presenti nella tabella (escluso il campo \textbf{Data}, la cui funzione è autoesplicativa):
+\begin{itemize}
+    \item \textbf{Impianto}: identifica univocamente l’impianto di risalita a cui si riferiscono i dati giornalieri. Oltre agli impianti sciistici veri e propri, è incluso anche il parcheggio situato presso la partenza della cabinovia principale, al fine di rilevare il volume di accessi all’area sciistica fin dalle fasi di avvicinamento.
+    
+    \item \textbf{Pass. DS}: riporta il numero di passaggi effettuati utilizzando lo skipass \textbf{Dolomiti Superski}, che consente l’accesso a tutti i comprensori sciistici delle Dolomiti. Si tratta in genere della categoria più numerosa, in quanto rappresenta la forma di skipass più estesa a livello territoriale, e prediletta da sciatori che sciano in più periodi e località, durante la stagione.
+    
+    \item \textbf{Pass. SP}: rappresenta i passaggi effettuati tramite skipass speciali o agevolati, riservati a categorie specifiche come maestri di sci, personale impiantistico e atleti. Questa tipologia costituisce una frazione minoritaria del totale, ma rilevante per la caratterizzazione dei flussi interni, anchese non verrà utilizzata per analisi specifiche in quanto il titolo non è accessibile a tutte le tipologie di utenti.
+    
+    \item \textbf{Pass. Valle}: comprende i passaggi registrati tramite lo skipass della valle di Cortina\footnote{Per “valle” si intendono le località descritte nel paragrafo introduttivo \ref{par:Contesto_storico}.}. Questo titolo di accesso, generalmente scelto da sciatori occasionali o da utenti che non intendono o necessitano di spostarsi tra comprensori; questo skipass consente di sciare esclusivamente all’interno del comprensorio ampezzano, con un costo inferiore rispetto allo skipass Dolomiti Superski.
+    
+    \item \textbf{Passaggi Tot.}: rappresenta la somma complessiva dei passaggi giornalieri su ciascun impianto. Tale valore può risultare superiore alla somma delle singole tipologie di skipass, poiché include anche aperture manuali e passaggi effettuati tramite sistemi a punti, la cui gestione e pulizia dei dati verranno descritte nel paragrafo \ref{par:Pulizia_dati}.
+\end{itemize}
+
+
+Questa struttura dati, e le abbreviazioni verranno usate nelle fasi successive di pulizia e analisi.
+Nel capitolo seguente verranno illustrate le le prime operazioni svolte sui dati, tra cui la pulizia, elaborazione e modellazione concettuale del dataset; operazioni necessarie per garantire la coerenza e qualità ai fini della visualizzazione multidimensionale.
+
+    
