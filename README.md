@@ -16,6 +16,10 @@ The project integrates:
 
 The goal is to analyse seasonal trends, weekly patterns, weather impacts, and skipass behaviours across multiple winter seasons.
 
+The results of the study can be seen on Tableau Public at the following Link:
+
+- [Visualization Repository](https://public.tableau.com/app/profile/brando.corti/viz/AnaliticaFrecciaNelCielo/)
+
 ---
 
 
